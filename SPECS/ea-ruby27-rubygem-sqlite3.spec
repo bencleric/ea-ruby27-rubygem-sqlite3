@@ -30,8 +30,6 @@ Source0:        %{gem_name}-%{version}.gem
 Requires:       %{?scl_prefix}ruby(rubygems)
 Requires:       %{?scl_prefix}ruby(release)
 
-BuildRequires:  tree
-
 BuildRequires:  sqlite-devel
 BuildRequires:  scl-utils
 BuildRequires:  scl-utils-build
