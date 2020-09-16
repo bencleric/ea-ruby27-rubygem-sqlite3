@@ -75,16 +75,8 @@ find . -name \*.rb -or -name \*.gem | xargs chmod 0644
 %global gemsmri  %{gemsdir}/sqlite3-%{version}
 
 mkdir -p %{buildroot}/%{gemsmri}
-mkdir -p %{buildroot}/%{gemsbase}/cache
-mkdir -p %{buildroot}/%{gemsbase}/doc
-mkdir -p %{buildroot}/%{gemsbase}/specifications
-mkdir -p %{buildroot}/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}
 
-cp -ar %{gemsbase}/extensions/x86_64-linux/2.7.0/sqlite3-%{version}/* %{buildroot}/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}
-cp -ar %{gemsmri}/* %{buildroot}/%{gemsmri}
-cp -a %{gemsmri}/.gemtest %{buildroot}/%{gemsmri}
-cp -a %{gemsmri}/.travis.yml %{buildroot}/%{gemsmri}
-cp -a  %{gemsbase}/specifications/sqlite3-%{version}.gemspec %{buildroot}/%{gemsbase}/specifications/
+cp -ar %{gemsbase}/* %{buildroot}/%{gemsbase}
 
 %check
 # I cannot get this to work, not sure why
@@ -98,32 +90,22 @@ cp -a  %{gemsbase}/specifications/sqlite3-%{version}.gemspec %{buildroot}/%{gems
 #%endif
 
 %files
-/%{gemsmri}
+/%{gemsbase}
 %dir /%{gemsdir}
 %exclude /%{gemsmri}/.gemtest
 %exclude /%{gemsmri}/.travis.yml
 %exclude /%{gemsmri}/appveyor.yml
-%doc /%{gemsmri}/README.rdoc
-%doc /%{gemsmri}/LICENSE
 %exclude /%{gemsmri}/ext
 %exclude /%{gemsbase}/cache
-/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}/gem.build_complete
-/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}/gem_make.out
-/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}/mkmf.log
-/%{gemsbase}/extension/x86_64-linux/2.7.0/sqlite3-%{version}/sqlite3/sqlite3_native.so
-/%{gemsbase}/specifications/sqlite3-%{version}.gemspec
+%doc /%{gemsmri}/README.rdoc
+%doc /%{gemsmri}/LICENSE
 
 %files doc
 %doc /%{gemsmri}/API_CHANGES.rdoc
 %doc /%{gemsmri}/CHANGELOG.rdoc
 %doc /%{gemsmri}/ChangeLog.cvs
 %doc /%{gemsmri}/Manifest.txt
-/%{gemsmri}/Rakefile
-/%{gemsmri}/Gemfile
-/%{gemsmri}/setup.rb
 %doc /%{gemsmri}/faq/
-/%{gemsmri}/rakelib/
-/%{gemsmri}/test/
 
 %changelog
 * Wed Sep 09 2020 Julian Brown <julian.brown@cpanel.net> - 1.4.2-1
