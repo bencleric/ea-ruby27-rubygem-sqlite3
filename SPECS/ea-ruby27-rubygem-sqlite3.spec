@@ -70,13 +70,29 @@ find . -name \*.rb -or -name \*.gem | xargs chmod 0644
 %build
 
 %install
-%global gemsbase opt/cpanel/ea-ruby27/root/usr/share/ruby/gems/ruby-%{ruby_version}
+%global rubybase opt/cpanel/ea-ruby27/root/usr/share/ruby/gems/ruby-%{ruby_version}
+%global lib64base opt/cpanel/ea-ruby27/root/usr/lib64/gems/ruby/sqlite3-%{version}
+
+%global gemsbase opt/cpanel/ea-ruby27/root/usr/share/gems
 %global gemsdir  %{gemsbase}/gems
 %global gemsmri  %{gemsdir}/sqlite3-%{version}
+%global gemsdoc  %{gemsbase}/doc/sqlite3-%{version}
 
 mkdir -p %{buildroot}/%{gemsmri}
+mkdir -p %{buildroot}/%{gemsdoc}
+mkdir -p %{buildroot}/%{gemsbase}/specifications
+mkdir -p %{buildroot}/%{rubybase}/sqlite3-%{version}
+mkdir -p %{buildroot}/%{lib64base}
 
-cp -ar %{gemsbase}/* %{buildroot}/%{gemsbase}
+echo "FILE LIST"
+find opt/cpanel/ea-ruby27/root/usr -type f -print 
+echo "END FILE LIST"
+
+cp -ar %{gemsmri}/* %{buildroot}/%{gemsmri}
+cp -ar %{gemsdoc}/* %{buildroot}/%{gemsdoc}
+cp -ar %{gemsmri}/* %{buildroot}/%{rubybase}/sqlite3-%{version}
+cp -a %{gemsbase}/specifications/sqlite3-%{version}.gemspec %{buildroot}/%{gemsbase}/specifications
+cp -a %{lib64base}/* %{buildroot}/%{lib64base}
 
 %check
 # I cannot get this to work, not sure why
@@ -99,6 +115,8 @@ cp -ar %{gemsbase}/* %{buildroot}/%{gemsbase}
 %exclude /%{gemsbase}/cache
 %doc /%{gemsmri}/README.rdoc
 %doc /%{gemsmri}/LICENSE
+/%{rubybase}/sqlite3-%{version}
+/%{lib64base}
 
 %files doc
 %doc /%{gemsmri}/API_CHANGES.rdoc
