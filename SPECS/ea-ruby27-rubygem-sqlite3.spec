@@ -84,10 +84,6 @@ mkdir -p %{buildroot}/%{gemsbase}/specifications
 mkdir -p %{buildroot}/%{rubybase}/sqlite3-%{version}
 mkdir -p %{buildroot}/%{lib64base}
 
-echo "FILE LIST"
-find opt/cpanel/ea-ruby27/root/usr -type f -print 
-echo "END FILE LIST"
-
 cp -ar %{gemsmri}/* %{buildroot}/%{gemsmri}
 cp -ar %{gemsdoc}/* %{buildroot}/%{gemsdoc}
 cp -ar %{gemsmri}/* %{buildroot}/%{rubybase}/sqlite3-%{version}
