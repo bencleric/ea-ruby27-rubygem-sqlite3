@@ -81,12 +81,10 @@ find . -name \*.rb -or -name \*.gem | xargs chmod 0644
 mkdir -p %{buildroot}/%{gemsmri}
 mkdir -p %{buildroot}/%{gemsdoc}
 mkdir -p %{buildroot}/%{gemsbase}/specifications
-mkdir -p %{buildroot}/%{rubybase}/sqlite3-%{version}
 mkdir -p %{buildroot}/%{lib64base}
 
 cp -ar %{gemsmri}/* %{buildroot}/%{gemsmri}
 cp -ar %{gemsdoc}/* %{buildroot}/%{gemsdoc}
-cp -ar %{gemsmri}/* %{buildroot}/%{rubybase}/sqlite3-%{version}
 cp -a %{gemsbase}/specifications/sqlite3-%{version}.gemspec %{buildroot}/%{gemsbase}/specifications
 cp -a %{lib64base}/* %{buildroot}/%{lib64base}
 
@@ -111,7 +109,6 @@ cp -a %{lib64base}/* %{buildroot}/%{lib64base}
 %exclude /%{gemsbase}/cache
 %doc /%{gemsmri}/README.rdoc
 %doc /%{gemsmri}/LICENSE
-/%{rubybase}/sqlite3-%{version}
 /%{lib64base}
 
 %files doc
