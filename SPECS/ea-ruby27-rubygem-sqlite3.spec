@@ -4,8 +4,7 @@
 %global pkg ruby27
 %global gem_name sqlite3
 
-# NOTE: I need the version, is there a better way?
-%global ruby_version 2.7.1
+%global ruby_version %(/opt/cpanel/ea-ruby27/root/usr/bin/ruby -e 'puts %RUBY_VERSION')
 
 # Force Software Collections on
 %global _scl_prefix %{ns_dir}
@@ -17,7 +16,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 Summary:        Allows Ruby scripts to interface with a SQLite3 database
 Name:           %{?scl_prefix}rubygem-%{gem_name}
@@ -119,6 +118,9 @@ cp -a %{lib64base}/* %{buildroot}/%{lib64base}
 %doc /%{gemsmri}/faq/
 
 %changelog
+* Tue Jun 29 2021 Julian Brown <julian.brown@cpanel.net> - 1.4.2-2
+- ZC-9033: provide reliable way to get the ruby_version
+
 * Wed Sep 09 2020 Julian Brown <julian.brown@cpanel.net> - 1.4.2-1
 - ZC-7511 - add rubygem sqlite3 to Ruby 2.7
 
